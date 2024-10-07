@@ -24,9 +24,9 @@ public class MetaJoystickPublisher : MonoBehaviour
             // Create a Vector3 message (or Vector2 if that’s sufficient for your application)
             Vector3Msg msg = new Vector3Msg
             {
-                x = joystickPosition.x,
-                y = joystickPosition.y,
-                z = 0 // set to zero or another value as needed
+                x = 0.0,
+                y = joystickPosition.y/2.0,
+                z = joystickPosition.x/2.0 // set to zero or another value as needed
             };
 
             // Publish the message to ROS2
