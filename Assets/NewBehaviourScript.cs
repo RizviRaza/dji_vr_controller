@@ -5,7 +5,8 @@ using RosMessageTypes.Geometry;
 
 public class MetaJoystickPublisher : MonoBehaviour
 {
-    public string rosTopic = "/mavic_1/gimbal_cmd";
+    public string gimbalcontrolTopic = "/mavic_1/gimbal_vel_cmd";
+    public string gimbalresetTopic = "/mavic_1/gimbal_cmd";
     private ROSConnection ros;
     private XRNode leftHand = XRNode.LeftHand;
 
@@ -13,7 +14,9 @@ public class MetaJoystickPublisher : MonoBehaviour
     {
         // Initialize the ROS connection
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<Vector3Msg>(rosTopic);
+        ros.RegisterPublisher<Vector3Msg>(gimbalcontrolTopic);
+        ros.RegisterPublisher<Vector3Msg>(gimbalresetTopic);
+
     }
 
     void Update()
@@ -30,7 +33,22 @@ public class MetaJoystickPublisher : MonoBehaviour
             };
 
             // Publish the message to ROS2
-            ros.Publish(rosTopic, msg);
+            ros.Publish(gimbalcontrolTopic, msg);
+        }
+
+        // Check for the X button press
+        if (InputDevices.GetDeviceAtXRNode(leftHand).TryGetFeatureValue(CommonUsages.primaryButton, out bool isXPressed) && isXPressed)
+        {
+            // Create a Vector3 message with all zeros for the gimbal command
+            Vector3Msg gimbalCmdMsg = new Vector3Msg
+            {
+                x = 0,
+                y = 0,
+                z = 0
+            };
+
+            // Publish the gimbal command
+            ros.Publish(gimbalresetTopic, gimbalCmdMsg);
         }
     }
 }
