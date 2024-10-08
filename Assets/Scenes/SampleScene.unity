@@ -5009,7 +5009,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668adbfd8a1d6074287ddabf7d328947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rosTopic: /mavic_1/gimbal_vel_cmd
+  gimbalcontrolTopic: /mavic_1/gimbal_vel_cmd
+  gimbalresetTopic: /mavic_1/gimbal_cmd
+  cmdVelTopic: /mavic_1/cmd_vel
 --- !u!4 &514288291
 Transform:
   m_ObjectHideFlags: 0
