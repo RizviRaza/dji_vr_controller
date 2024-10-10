@@ -48,8 +48,8 @@ public class MetaJoystickPublisher : MonoBehaviour
             Vector3Msg gimbalControlMsg = new Vector3Msg
             {
                 x = 0.0f,  // No up/down control in this setup
-                y = gimbalY,
-                z = gimbalZ
+                y = -gimbalY,
+                z = -gimbalZ
             };
 
             // Publish the gimbal control message
