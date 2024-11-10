@@ -13,7 +13,7 @@ public class MetaJoystickPublisher : MonoBehaviour
     private XRNode leftHand = XRNode.LeftHand;
     private XRNode rightHand = XRNode.RightHand;
 
-    private float deadzone = 0.2f;       // Deadzone to allow more freedom around the center for both gimbal and movement
+    private float deadzone = 0.1f;       // Deadzone to allow more freedom around the center for both gimbal and movement
     private float speedMultiplier = 0.3f; // Multiplier to keep speed within range
 
     void Start()
@@ -34,12 +34,14 @@ public class MetaJoystickPublisher : MonoBehaviour
             float gimbalZ = 0;
 
             // Apply deadzone filtering for forward/backward gimbal movement
-            if (Mathf.Abs(leftJoystickPosition.y) > deadzone && Mathf.Abs(leftJoystickPosition.x) <= deadzone)
+            // if (Mathf.Abs(leftJoystickPosition.y) > deadzone && Mathf.Abs(leftJoystickPosition.x) <= deadzone)
+            if (Mathf.Abs(leftJoystickPosition.y) > Mathf.Abs(leftJoystickPosition.x))
             {
                 gimbalY = leftJoystickPosition.y * speedMultiplier;
             }
             // Apply deadzone filtering for right/left gimbal movement
-            else if (Mathf.Abs(leftJoystickPosition.x) > deadzone && Mathf.Abs(leftJoystickPosition.y) <= deadzone)
+            //else if (Mathf.Abs(leftJoystickPosition.x) > deadzone && Mathf.Abs(leftJoystickPosition.y) <= deadzone)
+            if (Mathf.Abs(leftJoystickPosition.y) < Mathf.Abs(leftJoystickPosition.x))
             {
                 gimbalZ = leftJoystickPosition.x* speedMultiplier;
             }
