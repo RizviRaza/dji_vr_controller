@@ -81,12 +81,12 @@ public class MetaJoystickPublisher : MonoBehaviour
             float linearZ = 0;
 
             // Check if joystick is pushed forward/backward significantly
-            if (Mathf.Abs(rightJoystickPosition.y) > deadzone && Mathf.Abs(rightJoystickPosition.x) <= deadzone)
+            if (Mathf.Abs(rightJoystickPosition.y) > Mathf.Abs(rightJoystickPosition.x))
             {
                 linearX = rightJoystickPosition.y * speedMultiplier; // Forward/backward
             }
             // Check if joystick is pushed right/left significantly
-            else if (Mathf.Abs(rightJoystickPosition.x) > deadzone && Mathf.Abs(rightJoystickPosition.y) <= deadzone)
+            else if (Mathf.Abs(rightJoystickPosition.x) > Mathf.Abs(rightJoystickPosition.y))
             {
                 linearY = rightJoystickPosition.x * speedMultiplier; // Right/left
             }
