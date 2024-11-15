@@ -54,8 +54,13 @@ public class MetaJoystickPublisher : MonoBehaviour
                 z = -gimbalZ
             };
 
-            // Publish the gimbal control message
-            ros.Publish(gimbalcontrolTopic, gimbalControlMsg);
+            if (gimbalControlMsg.y != 0 || gimbalControlMsg.z != 0)
+            {
+                // Publish the gimbal control message
+                ros.Publish(gimbalcontrolTopic, gimbalControlMsg);
+            }
+
+            
         }
 
         // Check for the X button press on the left controller for gimbal reset
@@ -128,8 +133,14 @@ public class MetaJoystickPublisher : MonoBehaviour
                 angular = new Vector3Msg { x = 0, y = 0, z = angularZ }
             };
 
+            if (cmdVelMsg.linear.x != 0 || cmdVelMsg.linear.y != 0 || cmdVelMsg.linear.z != 0 || cmdVelMsg.angular.z != 0)
+            {
+                // Publish the cmd_vel message
+                ros.Publish(cmdVelTopic, cmdVelMsg);
+            }
+
             // Publish the cmd_vel message
-            ros.Publish(cmdVelTopic, cmdVelMsg);
+            //ros.Publish(cmdVelTopic, cmdVelMsg);
         }
     }
 }
