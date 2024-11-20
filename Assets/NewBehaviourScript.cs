@@ -93,7 +93,7 @@ public class MetaJoystickPublisher : MonoBehaviour
             // Check if joystick is pushed right/left significantly
             else if (Mathf.Abs(rightJoystickPosition.x) > Mathf.Abs(rightJoystickPosition.y))
             {
-                linearY = rightJoystickPosition.x * speedMultiplier; // Right/left
+                linearY = -rightJoystickPosition.x * speedMultiplier; // Right/left
             }
 
             // Check for B button press on right controller
